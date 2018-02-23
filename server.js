@@ -6,7 +6,7 @@ const svenskafans = require('./feeds/svenskafans.js');
 const facebook = require('./feeds/facebook.js');
 const hammarbyfotboll = require('./feeds/hammarbyfotboll.js');
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.send('<div>Hello World!</div>'))
 
 app.get('/feed', (req, res) => feed(req, res));
 
@@ -46,20 +46,3 @@ const feed = (req, res) => {
     res.json(result)
   }).catch(err => res.send(err));
 }
-
-// const schema = {
-//   offers: [
-//     '.offer-category__item',
-//     {
-//       name: '.offer-type__product-name',
-//       price: '.product-price__price-value',
-//       amount: ($, context) => $('.product-price__unit-item', context).text().replace('/', '') || $('.product-price__amount', context).text().replace(' för', ''),
-//       info: '.offer-type__product-info',
-//       image: $ => $('.lazy').attr('data-original'),
-//     }
-//   ]
-// }
-// Scraper.get('https://www.ica.se/butiker/supermarket/stockholm/ica-supermarket-matmaster-1272/erbjudanden/', schema)
-//   .then(page => {
-//     console.log(JSON.stringify(page, null, 2))
-//   })
