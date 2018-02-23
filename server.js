@@ -26,7 +26,7 @@ app.get('/hammarbyfotboll/feed', (req, res) => hammarbyfotboll()
   .then(feed => res.json(feed))
   .catch(err => res.send(err)));
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(8080, () => console.log('Example app listening on port 3000!'))
 
 const feed = (req, res) => {
   const sources = [

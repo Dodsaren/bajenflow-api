@@ -2,7 +2,10 @@
   "name": "bajenflodet",
   "version": "1.0.0",
   "description": "node service to collect bajen related flows",
-  "main": "index.js",
+  "main": "server.js",
+  "engines": {
+    "node": "8.x"
+  },
   "author": "Jim Nilsson",
   "license": "MIT",
   "dependencies": {
