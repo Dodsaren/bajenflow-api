@@ -6,7 +6,7 @@ const schema = {
     {
       author: 'a[href^="/visa-profil"]',
       created_date: '.m_cont > b',
-      message: ($, context) => $('.m_in', context).html().replace(/\s\s+/g, '')
+      message: ($, context) => $('.m_in', context).html().replace(/\s\s+/g, '').replace(/\\/g, '')
     }
   ]
 }

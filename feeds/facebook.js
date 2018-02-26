@@ -1,4 +1,5 @@
 const rp = require('request-promise');
+const anchorme = require('anchorme').default;
 
 const APP_ID = process.env.FACEBOOK_APP_ID;
 const APP_SECRET = process.env.FACEBOOK_APP_SECRET;
@@ -15,6 +16,7 @@ const FIELDS = [
   'message',
   'full_picture.as(image)',
   'link',
+  'from',
   'type'
 ]
 
@@ -30,13 +32,11 @@ module.exports = () => {
     return rp(options)
   })
   // Resolve, merge and sort.
-  return Promise.all(promises).then(res => {
-    const feed = res.reduce((acc, cur) => acc.concat(cur.data), [])
+  return Promise.all(promises).then(res =>
+    res.reduce((acc, cur) => acc.concat(cur.data), [])
       .sort((a, b) => {
         const A = new Date(a.created_time);
         const B = new Date(b.created_time);
         return A > B ? -1 : A < B ? 1 : 0;
-      })
-    return feed;
-  });
+      }))
 }

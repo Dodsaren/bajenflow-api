@@ -47,7 +47,9 @@ function getTweets(res) {
     },
     json: true
   }
-  return rp(options)
+  return rp(options).then(res => {
+    return res.statuses.map(t => t);
+  });
 }
 
 function retrieveToken() {

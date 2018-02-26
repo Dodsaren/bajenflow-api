@@ -1,10 +1,13 @@
 const dotenv = require('dotenv').config();
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const twitter = require('./feeds/twitter.js');
 const svenskafans = require('./feeds/svenskafans.js');
 const facebook = require('./feeds/facebook.js');
 const hammarbyfotboll = require('./feeds/hammarbyfotboll.js');
+
+app.use(cors());
 
 app.get('/', (req, res) => res.send('<div>Hello World!</div>'))
 
@@ -26,7 +29,7 @@ app.get('/hammarbyfotboll/feed', (req, res) => hammarbyfotboll()
   .then(feed => res.json(feed))
   .catch(err => res.send(err)));
 
-app.listen(8080, () => console.log('Example app listening on port 8080!'))
+app.listen(3000, () => console.log('Example app listening on port 8080!'))
 
 const feed = (req, res) => {
   const sources = [
