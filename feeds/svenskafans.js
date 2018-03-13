@@ -1,4 +1,7 @@
 const Scraper = require('scraper');
+const normalize = require('../utils/normalize.js');
+
+const URL = 'https://www.svenskafans.com/fotboll/bajen/forum.aspx';
 
 const schema = {
   posts: [
@@ -12,5 +15,6 @@ const schema = {
 }
 
 module.exports = () => {
-  return Scraper.get('https://www.svenskafans.com/fotboll/bajen/forum.aspx', schema)
+  return Scraper.get(URL, schema)
+          .then(res => normalize.svenskafans(res.posts))
 }

@@ -1,5 +1,6 @@
 const rp = require('request-promise');
 const rawurlencode = require('../utils/rawurlencode.js');
+const normalize = require('../utils/normalize.js');
 const NodeCache = require('node-cache');
 const myCache = new NodeCache();
 const cacheKey = 'twitter';
@@ -48,7 +49,7 @@ function getTweets(res) {
     json: true
   }
   return rp(options).then(res => {
-    return res.statuses.map(t => t);
+    return normalize.twitter(res.statuses);
   });
 }
 
@@ -68,14 +69,13 @@ function retrieveToken() {
     },
     json: true
   }
-  return rp(options)
-    .then(cache)
+  return rp(options).then(cache)
 }
 
 function cache (response) {
   return new Promise((resolve, reject) => {
     const obj = { access_token: response.access_token };
-    myCache.set( 'twitter', obj, (err, success) => {
+    myCache.set( cacheKey, obj, (err, success) => {
       if (err) reject(err);
       resolve(obj)
     })

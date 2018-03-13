@@ -1,5 +1,6 @@
 const rp = require('request-promise');
 const anchorme = require('anchorme').default;
+const normalize = require('../utils/normalize.js');
 
 const APP_ID = process.env.FACEBOOK_APP_ID;
 const APP_SECRET = process.env.FACEBOOK_APP_SECRET;
@@ -21,7 +22,6 @@ const FIELDS = [
 ]
 
 module.exports = () => {
-  // Create a promise for each item in GROUPS
   const promises = GROUPS.map(id => {
     const fields = FIELDS.join(',');
     const options = {
@@ -31,12 +31,13 @@ module.exports = () => {
     }
     return rp(options)
   })
-  // Resolve, merge and sort.
-  return Promise.all(promises).then(res =>
+  return Promise.all(promises)
+  .then(res => normalize.facebook(
     res.reduce((acc, cur) => acc.concat(cur.data), [])
-      .sort((a, b) => {
-        const A = new Date(a.created_time);
-        const B = new Date(b.created_time);
-        return A > B ? -1 : A < B ? 1 : 0;
-      }))
+    .sort((a, b) => {
+      const A = new Date(a.created_time);
+      const B = new Date(b.created_time);
+      return A > B ? -1 : A < B ? 1 : 0;
+    })) 
+  )
 }

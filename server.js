@@ -15,19 +15,19 @@ app.get('/feed', (req, res) => feed(req, res));
 
 app.get('/svenskafans/feed', (req, res) => svenskafans()
   .then(feed => res.json(feed))
-  .catch(err => res.send(err)));
+  .catch(err => console.log(err)));
 
 app.get('/twitter/feed', (req, res) => twitter()
   .then(feed => res.json(feed))
-  .catch(err => res.send(err)));
+  .catch(err => console.log(err)));
 
 app.get('/facebook/feed', (req, res) => facebook()
   .then(feed => res.json(feed))
-  .catch(err => res.send(err)));
+  .catch(err => console.log({err})));
 
 app.get('/hammarbyfotboll/feed', (req, res) => hammarbyfotboll()
   .then(feed => res.json(feed))
-  .catch(err => res.send(err)));
+  .catch(err => console.log(err)));
 
 app.listen(process.env.PORT || 8080, () => 
   console.log('Example app listening on port ' + process.env.PORT || 8080))
