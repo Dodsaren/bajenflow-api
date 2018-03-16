@@ -42,7 +42,7 @@ function getTweets(res) {
   const screenNames = SCREEN_NAMES.map(i => 'from:' + i).join('+OR+');
   const options = {
     method: 'GET',
-    uri: API_BASE_PATH + '/1.1/search/tweets.json?q=' + screenNames + '&tweet_mode=extended&count=30',
+    uri: API_BASE_PATH + '/1.1/search/tweets.json?q=' + screenNames + '&tweet_mode=extended&count=50',
     headers: {
       'Authorization': 'Bearer ' + res.access_token
     },
