@@ -20,7 +20,7 @@ module.exports = {
     null,
     null,
     i.message,
-    null,
+    i.image,
     null,
     new dateFormatter(i.created_time).standard(),
     i.from ? i.from.name : null,
