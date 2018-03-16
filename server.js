@@ -24,14 +24,11 @@ app.get('/:source/feed', (req, res) => {
   }
   feeds[req.params.source]()
     .then(feed => res.json(feed))
-    .catch(err => {
-      console.log('%s Error: %s', new Date().toLocaleString(), err);
-      res.status(500).send('Internal Server Error')
-    })
+    .catch(err => catcher(err, res))
 });
 
 app.listen(process.env.PORT || 8080, () => 
-  console.log('Example app listening on port ' + process.env.PORT || 8080))
+  console.log('Bajen flow app listening on port ' + process.env.PORT || 8080))
 
 const feed = (req, res) => {
   const sources = [
@@ -48,5 +45,10 @@ const feed = (req, res) => {
       hammarbyfotboll: feed[3]
     };
     res.json(result)
-  }).catch(err => res.send(err));
+  }).catch(err => catcher(err, res));
+}
+
+const catcher = (err, res) => {
+  console.log('%s ERROR: %s', new Date().toLocaleString(), err);
+  res.status(500).send('Internal Server Error')
 }
