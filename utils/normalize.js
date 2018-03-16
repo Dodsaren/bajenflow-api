@@ -1,19 +1,13 @@
 const dateFormatter = require('./dateFormatter.js');
 
-const obj = (title, text, image, video, date, author, link) => {
-  return {
-    title,
-    text,
-    image,
-    video,
-    date,
-    author,
-    link
-  }
+// Output
+const obj = (title, subtitle, text, image, video, date, author, link) => {
+  return { title, subtitle, text, image, video, date, author, link }
 }
 
 module.exports = {
   twitter: (data) => data.map(i => obj(
+    null,
     null,
     i.full_text,
     null,
@@ -24,6 +18,7 @@ module.exports = {
   )),
   facebook: (data) => data.map(i => obj(
     null,
+    null,
     i.message,
     null,
     null,
@@ -33,15 +28,19 @@ module.exports = {
   )),
   svenskafans: (data) => data.map(i => obj(
     null,
+    null,
     i.message,
     null,
     null,
     new dateFormatter(i.created_date).noSeconds(),
-    i.author, // TODO: Do something about author names that has the string "Tippar" in them
-    null
+    (() => i.author.indexOf('Tippar') === -1 ? i.author : 
+      i.author.substring(0, i.author.indexOf('Tippar'))
+    )(),
+    i.link_tip
   )),
   hammarbyfotboll: (data) => data.map(i => obj(
-    i.title, // This struct also has subtitle
+    i.title,
+    i.subtitle,
     i.message,
     i.image,
     i.video,
