@@ -30,7 +30,6 @@ const HASHTAGS = [];
 module.exports = () => {
   return new Promise((resolve, reject) => {
     myCache.get(cacheKey, (err, value) => {
-      console.log('get cache', value);
       if (err || value == undefined) resolve(retrieveToken());
       resolve(value)
     })

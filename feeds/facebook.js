@@ -1,5 +1,4 @@
 const rp = require('request-promise');
-const anchorme = require('anchorme').default;
 const normalize = require('../utils/normalize.js');
 
 const APP_ID = process.env.FACEBOOK_APP_ID;
