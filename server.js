@@ -14,6 +14,8 @@ app.use(cors());
 
 app.use(logger);
 
+app.all('/ping', (req, res) => res.send('pong'));
+
 app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
 
 app.get('/feed', (req, res) => feed(req, res));
