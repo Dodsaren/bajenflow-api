@@ -58,9 +58,9 @@ function retrieveToken() {
   const credentials = Buffer.from([encoded_key, encoded_secret].join(':')).toString('base64');
   const options = {
     method: 'POST',
-    uri: API_BASE_PATH + '/oauth2/token',
+    uri: `${API_BASE_PATH}/oauth2/token`,
     headers: {
-      'Authorization': 'Basic ' + credentials,
+      'Authorization': `Basic ${credentials}`,
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     },
     form: {

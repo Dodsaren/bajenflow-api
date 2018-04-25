@@ -33,13 +33,12 @@ app.listen(process.env.PORT || 8080, () =>
   console.log('Bajen flow app listening on port ' + process.env.PORT || 8080))
 
 const feed = (req, res) => {
-  const sources = [
+  Promise.all([
     feeds.twitter(),
     feeds.svenskafans(),
     feeds.facebook(),
     feeds.hammarbyfotboll()
-  ];
-  Promise.all(sources).then(feed => {
+  ]).then(feed => {
     const result = {
       twitter: feed[0],
       svenskafans: feed[1],

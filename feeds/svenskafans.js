@@ -1,7 +1,7 @@
 const Scraper = require('scraper');
 const normalize = require('../utils/normalize.js');
 
-const URL = 'https://www.svenskafans.com/fotboll/bajen/forum.aspx';
+const URL = 'https://www.svenskafans.com/fotboll/bajen/forum.aspx/';
 
 const schema = {
   posts: [

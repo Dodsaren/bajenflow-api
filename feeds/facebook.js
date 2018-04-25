@@ -25,7 +25,7 @@ module.exports = () => {
     const fields = FIELDS.join(',');
     const options = {
       method: 'GET',
-      uri: API_BASE_PATH + '/v2.12/' + id + '/feed?fields=' + fields + '&access_token=' + APP_ID + '|' + APP_SECRET,
+      uri: `${API_BASE_PATH}/v2.12/${id}/feed?fields=${fields}&access_token=${APP_ID}|${APP_SECRET}`,
       json: true
     }
     return rp(options)

@@ -34,8 +34,7 @@ module.exports = {
     null,
     new dateFormatter(i.created_date).noSeconds(),
     (() => i.author.indexOf('Tippar') === -1 ? i.author : 
-      i.author.substring(0, i.author.indexOf('Tippar'))
-    )(),
+      i.author.substring(0, i.author.indexOf('Tippar')))(),
     i.link_tip
   )),
   hammarbyfotboll: (data) => data.map(i => obj(
